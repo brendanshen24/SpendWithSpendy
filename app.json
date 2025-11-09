@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "my-expo-app",
-    "slug": "my-expo-app",
+    "name": "SpendWithSpendy",
+    "slug": "SpendWithSpendy",
     "version": "1.0.0",
 
     "web": {
@@ -11,9 +11,14 @@
     "experiments": {
       "tsconfigPaths": true
     },
-
-    "plugins": [],
-
+    "plugins": [
+      [
+        "react-native-nfc-manager",
+        {
+          "nfcPermission": "Allow this app to scan NFC tags to read their type and contents."
+        }
+      ]
+    ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
 
@@ -26,13 +31,30 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NFCReaderUsageDescription": "Allow this app to scan NFC tags to read their type and contents."
+      },
+      "entitlements": {
+        "com.apple.developer.nfc.readersession.formats": [
+          "NDEF",
+          "TAG",
+          "NDEF",
+          "TAG"
+        ]
+      },
+      "bundleIdentifier": "com.anonymous.SpendWithSpendy"
     },
     "android": {
+      "permissions": [
+        "android.permission.NFC",
+        "android.permission.NFC"
+      ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.Surge.SpendWithSpendy"
     }
   }
 }
