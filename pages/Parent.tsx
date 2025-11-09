@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
+import { View, Text, TouchableOpacity, Image, TextInput, Alert, Pressable, Platform, Keyboard } from 'react-native';
 import Tile from "../components/Tile";
 import BottomDrawer from '../components/BottomDrawer';
 import SpendingConfirmation from '../components/SpendingConfirmation';
@@ -107,15 +107,87 @@ const PasscodeScreen = ({ onSuccess }: { onSuccess: () => void }) => {
 };
 
 // Parent Dashboard Component
-const ParentDashboard = ({ balance, setBalance }: { balance: number, setBalance: () => void }) => {
+import NfcManager, { NfcEvents } from 'react-native-nfc-manager';
+
+const ParentDashboard = ({ balance, setBalance }: { balance: number, setBalance?: (b:number) => void }) => {
     const [drawerVisible, setDrawerVisible] = useState(false);
     const [selectedTile, setSelectedTile] = useState<SelectedTile | null>(null);
     const [confirmationVisible, setConfirmationVisible] = useState(false);
-    const [selectedAmount, setSelectedAmount] = useState(0);
+    const [selectedAmount, setSelectedAmount] = useState<number>(0);
+    const [amountInput, setAmountInput] = useState<string>('');
+    const [drawerStep, setDrawerStep] = useState<'input' | 'nfc' | 'done'>('input');
+    const [scanning, setScanning] = useState(false);
+    const amountInputRef = useRef<TextInput | null>(null);
+
     const openFor = (tile: SelectedTile) => {
         setSelectedTile(tile);
+        setAmountInput('');
+        setSelectedAmount(0);
+        setDrawerStep('input');
         setDrawerVisible(true);
     };
+
+    // Auto-focus the amount input when drawer opens and we're on the input step
+    useEffect(() => {
+        if (drawerVisible && drawerStep === 'input') {
+            // small delay to allow drawer animation/modal to mount
+            const t = setTimeout(() => {
+                amountInputRef.current?.focus?.();
+            }, 220);
+            return () => clearTimeout(t);
+        }
+    }, [drawerVisible, drawerStep]);
+
+    const startNfcScan = useCallback(async (amount: number) => {
+        if (scanning) return;
+        setScanning(true);
+        try {
+            NfcManager.start();
+
+            // Wait for a tag discovery or technology request success
+            let resolved = false;
+            await new Promise<void>(async (resolve, reject) => {
+                try {
+                    NfcManager.setEventListener(NfcEvents.DiscoverTag, () => {
+                        if (resolved) return;
+                        resolved = true;
+                        resolve();
+                    });
+
+                    if (Platform.OS === 'ios') {
+                        await NfcManager.registerTagEvent({ alertMessage: 'Tap to sync funds' });
+                    } else {
+                        // Android: request a commonly used tech; if it resolves treat as success
+                        await NfcManager.requestTechnology(['android.nfc.tech.IsoDep' as any], { alertMessage: 'Tap to sync funds' });
+                        if (!resolved) {
+                            resolved = true;
+                            resolve();
+                        }
+                    }
+                } catch (e) {
+                    if (!resolved) reject(e);
+                }
+            });
+
+            // On success, add funds to balance
+            const newBal = Math.round((balance + amount) * 100) / 100;
+            setBalance && setBalance(newBal);
+            setDrawerStep('done');
+            
+
+            // close shortly after success
+            setTimeout(() => setDrawerVisible(false), 800);
+        } catch (err: any) {
+            Alert.alert('NFC Error', String(err?.message ?? 'Failed to read tag'));
+        } finally {
+            try {
+                NfcManager.setEventListener(NfcEvents.DiscoverTag, null);
+                await NfcManager.cancelTechnologyRequest();
+            } catch {}
+            setScanning(false);
+        }
+    }, [scanning, balance, setBalance]);
+
     return (
         <View style={{ flex: 1 }} className={"items-center"}>
             <View style={{ paddingVertical: 20 }}>
@@ -154,6 +226,68 @@ const ParentDashboard = ({ balance, setBalance }: { balance: number, setBalance:
                     onPress={() => openFor({ title: 'Payment Type', sub: 'MASTERCARD ENDING IN 3086', icon: require('../assets/mastercard.png'), side: require('../assets/arrow.png') })}
                 />
             </View>
+
+            {/* Bottom drawer for selected tile actions (Reload flow implemented) */}
+            <BottomDrawer visible={drawerVisible} onClose={() => setDrawerVisible(false)} height={{ fraction: 0.60 }}>
+                <View>
+                    <Text className="text-xl font-semibold mb-3">{selectedTile?.title ?? ''}</Text>
+
+                    {selectedTile?.title === 'Reload Card' && (
+                        <View>
+                            {drawerStep === 'input' && (
+                                <View>
+                                    <Text style={{ fontSize: 14, color: '#4B5563' }}>Enter amount to add</Text>
+                                    <TextInput
+                                        ref={amountInputRef}
+                                        value={amountInput}
+                                        onChangeText={(t) => setAmountInput(t)}
+                                        placeholder="0.00"
+                                        keyboardType="numeric"
+                                        className="w-full bg-gray-100 rounded-lg p-3 mb-4 text-lg"
+                                    />
+
+                                    <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
+                                        <Pressable
+                                            onPress={() => {
+                                                const amt = parseFloat(amountInput.replace(/[^0-9.]/g, '')) || 0;
+                                                if (!amt || amt <= 0) {
+                                                    Alert.alert('Invalid amount', 'Please enter an amount greater than 0');
+                                                    return;
+                                                }
+                                                setSelectedAmount(amt);
+                                                setDrawerStep('nfc');
+                                            }}
+                                            style={{ backgroundColor: '#1F1B15', paddingVertical: 12, paddingHorizontal: 20, borderRadius: 8, alignItems: 'center' }}
+                                        >
+                                            <Text style={{ color: '#E2E6EA', fontWeight: '600' }}>Continue</Text>
+                                        </Pressable>
+                                    </View>
+                                </View>
+                            )}
+
+                            {drawerStep === 'nfc' && (
+                                <View className="items-center">
+                                    <Text className="text-base mb-4">Tap your device to the card to sync</Text>
+                                    <Pressable
+                                        onPress={() => startNfcScan(selectedAmount)}
+                                        disabled={scanning}
+                                        style={{ backgroundColor: scanning ? '#9CA3AF' : '#1F1B15', paddingVertical: 12, paddingHorizontal: 20, borderRadius: 8 }}
+                                    >
+                                        <Text style={{ color: '#E2E6EA', fontWeight: '600' }}>{scanning ? 'Scanning...' : `Tap to sync $${selectedAmount.toFixed(2)}`}</Text>
+                                    </Pressable>
+                                </View>
+                            )}
+
+                            {drawerStep === 'done' && (
+                                <View className="items-center">
+                                    <Text className="text-lg font-semibold">Synced!</Text>
+                                    <Text className="text-sm text-gray-600">${selectedAmount.toFixed(2)} added to card</Text>
+                                </View>
+                            )}
+                        </View>
+                    )}
+                </View>
+            </BottomDrawer>
 
         </View>
     );

@@ -39,6 +39,8 @@ export default function Store({balance, setBalance, setTabState}: {
         // Deduct the amount from balance after successful NFC scan
         const newBalance = Math.max(0, balance - selectedAmount);
         setBalance(newBalance);
+        // Return to the Money tab after the tap/sync completes
+        if (setTabState) setTabState('Money');
     };
 
     // Show confirmation view instead of store when visible
