@@ -41,5 +41,5 @@ export default function Money({ balance, setBalance }: { balance: number, setBal
 
             </View>
         </View>
-    );
+    ); //test comment
 }
