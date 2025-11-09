@@ -1,16 +1,20 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { SafeAreaView, View, Text } from 'react-native';
 
 export default function HomeScreen() {
-  const money: number = 20.0; // test
+  const money: number = 20.0; // float
 
   return (
-    <View className="flex-1 bg-white items-center justify-center">
-      <View className="absolute top-4 left-4">
-        <Text className="text-2xl font-bold">{`$${money.toFixed(2)}`}</Text>
+    <SafeAreaView className="flex-1 bg-white">
+      {/* Replace this block to ensure true centering and bold font */}
+      <View className="w-full h-1/4 items-center justify-center">
+        <Text
+          className="text-5xl font-extrabold"
+          style={{ fontSize: 48, fontWeight: '800', textAlign: 'center' }}
+        >
+          {`$${money.toFixed(2)}`}
+        </Text>
       </View>
-
-      <Text className="text-lg">🏠 Home Page</Text>
-    </View>
+    </SafeAreaView>
   );
 }
