@@ -23,7 +23,7 @@ export default function App() {
 
                 {tabState === 'Money' && <Money balance={balance} setBalance={setBalance}/>}
 
-                {tabState === 'Store' && <Store/>}
+                {tabState === 'Store' && <Store balance={balance} setBalance={setBalance}/>}
 
                 {tabState === 'Lock' && <View />}
             </View>
