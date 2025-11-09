@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 
 export default function HomeScreen() {
-  const money: number = 20.0;
+  const money: number = 20.0; // test
 
   return (
     <View className="flex-1 bg-white items-center justify-center">
