@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { SafeAreaView, View, Text, useWindowDimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import NFCScanner from '../components/NFCScanner';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -58,6 +59,10 @@ export default function HomeScreen() {
         >
           {`$${money.toFixed(2)}`}
         </Text>
+      </View>
+
+      <View className="items-center">
+        <NFCScanner />
       </View>
 
       <View className="flex-1">

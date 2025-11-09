@@ -47,7 +47,6 @@ export default function App() {
                     tabBarInactiveTintColor: 'gray',
                 })}
             >
-                <NFCScanner />
                 <Tab.Screen name="Home" component={HomeScreen} />
                 <Tab.Screen name="Cart" component={CartScreen} />
                 <Tab.Screen name="Settings" component={SettingsScreen} />
