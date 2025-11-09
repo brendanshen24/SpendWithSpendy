@@ -228,7 +228,7 @@ const ParentDashboard = ({ balance, setBalance }: { balance: number, setBalance?
             </View>
 
             {/* Bottom drawer for selected tile actions (Reload flow implemented) */}
-            <BottomDrawer visible={drawerVisible} onClose={() => setDrawerVisible(false)} height={{ fraction: 0.60 }}>
+            <BottomDrawer visible={drawerVisible} onClose={() => setDrawerVisible(false)} height={{ fraction: 0.55 }}>
                 <View>
                     <Text className="text-xl font-semibold mb-3">{selectedTile?.title ?? ''}</Text>
 
@@ -236,17 +236,20 @@ const ParentDashboard = ({ balance, setBalance }: { balance: number, setBalance?
                         <View>
                             {drawerStep === 'input' && (
                                 <View>
-                                    <Text style={{ fontSize: 14, color: '#4B5563' }}>Enter amount to add</Text>
-                                    <TextInput
-                                        ref={amountInputRef}
-                                        value={amountInput}
-                                        onChangeText={(t) => setAmountInput(t)}
-                                        placeholder="0.00"
-                                        keyboardType="numeric"
-                                        className="w-full bg-gray-100 rounded-lg p-3 mb-4 text-lg"
-                                    />
+                                    <View className="w-full bg-gray-100 rounded-lg p-3 mb-4 text-lg flex flex-row items-center">
+                                        <Text className="mr-2">$</Text>
 
-                                    <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
+                                        <TextInput
+                                            ref={amountInputRef}
+                                            value={amountInput}
+                                            onChangeText={(t) => setAmountInput(t)}
+                                            placeholder="0.00"
+                                            keyboardType="numeric"
+                                            className="flex-1 text-lg"
+                                            style={{ lineHeight: 24 }}  // ✅ perfectly centers placeholder
+                                        />
+
+
                                         <Pressable
                                             onPress={() => {
                                                 const amt = parseFloat(amountInput.replace(/[^0-9.]/g, '')) || 0;
@@ -257,11 +260,17 @@ const ParentDashboard = ({ balance, setBalance }: { balance: number, setBalance?
                                                 setSelectedAmount(amt);
                                                 setDrawerStep('nfc');
                                             }}
-                                            style={{ backgroundColor: '#1F1B15', paddingVertical: 12, paddingHorizontal: 20, borderRadius: 8, alignItems: 'center' }}
+                                            style={{
+                                                backgroundColor: '#1F1B15',
+                                                paddingVertical: 12,
+                                                paddingHorizontal: 20,
+                                                borderRadius: 8,
+                                            }}
                                         >
-                                            <Text style={{ color: '#E2E6EA', fontWeight: '600' }}>Continue</Text>
+                                            <Text style={{ color: '#E2E6EA', fontWeight: '600' }}>Add</Text>
                                         </Pressable>
                                     </View>
+
                                 </View>
                             )}
 

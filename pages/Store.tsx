@@ -1,4 +1,4 @@
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, Alert } from 'react-native';
 import React, { useState } from 'react';
 import Tile from "../components/Tile";
 import BottomDrawer from '../components/BottomDrawer';
@@ -29,6 +29,24 @@ export default function Store({balance, setBalance, setTabState}: {
     const handlePointClick = (price: string) => {
         const amount = parseFloat(price.replace('$', ''));
         if (!isNaN(amount)) {
+            // If user doesn't have enough funds, show a popup and don't proceed
+            if (amount > balance) {
+                // Offer to go to Money tab to add funds if setTabState is provided
+                if (setTabState) {
+                    Alert.alert(
+                        'You don\'t have enough money to buy this!',
+                        "You'll need to ask someone to put in more money to buy this item.",
+                        [
+                            { text: 'Cancel', style: 'cancel' },
+                            { text: 'Add Money', onPress: () => setTabState('Parent') },
+                        ]
+                    );
+                } else {
+                    Alert.alert('Insufficient funds', "You don't have enough funds to buy this item.");
+                }
+                return;
+            }
+
             setSelectedAmount(amount);
             setDrawerVisible(false);
             setConfirmationVisible(true);
@@ -137,51 +155,51 @@ export default function Store({balance, setBalance, setTabState}: {
                         <View className={"bg-[#E2E6EA] p-[11px] rounded-[8px] mt-2"}>
                             <Tile
                                 iconPath={require('../assets/valorant2.png')}
-                                title={"475 Valorant Points"}
-                                sub={"$4.99"}
+                                title={`475 ${selectedTile.title} Points`}
+                                sub={"$5.00"}
                                 sideIconPath={require('../assets/money.png')}
                                 sideIconWidth={12}
                                 onPress={() => handlePointClick("$5.00")}
                             />
                             <Tile
                                 iconPath={require('../assets/valorant2.png')}
-                                title={"950 Valorant Points"}
-                                sub={"$9.99"}
+                                title={`950 ${selectedTile.title} Points`}
+                                sub={"$10.00"}
                                 sideIconPath={require('../assets/money.png')}
                                 sideIconWidth={12}
                                 onPress={() => handlePointClick("$10.00")}
                             />
                             <Tile
                                 iconPath={require('../assets/valorant2.png')}
-                                title={"1900 Valorant Points"}
-                                sub={"$19.99"}
+                                title={`1900 ${selectedTile.title} Points`}
+                                sub={"$20.00"}
                                 sideIconPath={require('../assets/money.png')}
                                 sideIconWidth={12}
                                 onPress={() => handlePointClick("$20.00")}
                             />
                             <Tile
                                 iconPath={require('../assets/valorant2.png')}
-                                title={"3325 Valorant Points"}
-                                sub={"$34.99"}
+                                title={`3325 ${selectedTile.title} Points`}
+                                sub={"$35.00"}
                                 sideIconPath={require('../assets/money.png')}
                                 sideIconWidth={12}
                                 onPress={() => handlePointClick("$35.00")}
                             />
                             <Tile
                                 iconPath={require('../assets/valorant2.png')}
-                                title={"4750 Valorant Points"}
-                                sub={"$49.99"}
+                                title={`4750 ${selectedTile.title} Points`}
+                                sub={"$50.00"}
                                 sideIconPath={require('../assets/money.png')}
                                 sideIconWidth={12}
-                                onPress={() => handlePointClick("50.00")}
+                                onPress={() => handlePointClick("$50.00")}
                             />
                             <Tile
                                 iconPath={require('../assets/valorant2.png')}
-                                title={"9500 Valorant Points"}
-                                sub={"$99.99"}
+                                title={`9500 ${selectedTile.title} Points`}
+                                sub={"$100.00"}
                                 sideIconPath={require('../assets/money.png')}
                                 sideIconWidth={12}
-                                onPress={() => handlePointClick("100.00")}
+                                onPress={() => handlePointClick("$100.00")}
                             />
                         </View>
 
