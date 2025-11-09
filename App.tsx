@@ -6,23 +6,24 @@ import TabSelector from "./components/TabSelector";
 import Store from "pages/Store";
 
 export default function App() {
-    const [balance, setBalance] = useState(0);
+    const [balance, setBalance] = useState(5);
     const [tabState, setTabState] = useState('Money');
 
     return (
         <>
             <View className='font-sf-pro-regular'>
                 {/*Spacer*/}
-                <View className="flex w-full h-[100px]"></View>
+                <View className="flex w-full h-[80px]"></View>
 
                 {/*Money/Store selector*/}
                 <View className="flex flex-row justify-center items-center py-[11px]">
                     <TabSelector selectedTab={tabState} setSelectedTab={setTabState} />
                 </View>
 
-                <Money balance={balance} setBalance={setBalance}/>
 
-                <Store/>
+                {tabState === 'Money' && <Money balance={balance} setBalance={setBalance}/>}
+
+                {tabState === 'Store' && <Store/>}
             </View>
         </>
     );

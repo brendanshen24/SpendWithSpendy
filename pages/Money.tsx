@@ -5,21 +5,14 @@ import { useState } from 'react';
 import TabSelector from "components/TabSelector";
 
 export default function Money({balance, setBalance}:{balance: number, setBalance: (tab: number) => void }  ) {
-
-    const [tabState, setTabState] = useState('Money'); // 'Money' or 'Store'
-
     return (
         <View>
             <View>
-                <Text className={"text-3xl font-bold text-center"}>
-                    {balance}
+                <Text className={"text-[86px] font-semibold text-center"}>
+                    ${balance}
                 </Text>
             </View>
 
-
-            <NFCScanner onTagDetected={() => {
-                console.log('Tag detected!');
-            }} />
 
         {/*    Balls*/}
         </View>
