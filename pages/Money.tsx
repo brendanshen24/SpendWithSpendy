@@ -15,6 +15,11 @@ export default function Money({
   const engine = useRef(Matter.Engine.create()).current;
   const [tick, setTick] = useState(0);
 
+  const removeBalance = (amount: number) => {
+    setBalance(Math.max(0, balance - amount));
+  };
+
+  
   useEffect(() => {
     const world = engine.world;
     world.gravity.y = 1.0; // gravity
