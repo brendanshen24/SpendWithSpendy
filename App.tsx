@@ -24,7 +24,7 @@ export default function App() {
 
                 {tabState === 'Money' && <Money balance={balance} setBalance={setBalance}/>}
 
-                {tabState === 'Store' && <Store balance={balance} setBalance={setBalance}/>}
+                {tabState === 'Store' && <Store balance={balance} setBalance={setBalance} setTabState={setTabState}/>}
 
                 {tabState === 'Parent' && <Parent balance={balance} setBalance={setBalance} setTabState={setTabState}/>}
             </View>

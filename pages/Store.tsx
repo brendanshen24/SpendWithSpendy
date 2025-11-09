@@ -11,7 +11,11 @@ type SelectedTile = {
     side: any;
 };
 
-export default function Store({ balance, setBalance }: { balance: number; setBalance: (balance: number) => void }) {
+export default function Store({balance, setBalance, setTabState}: {
+    balance: number,
+    setBalance: (balance: number) => void,
+    setTabState?: (value: (((prevState: string) => string) | string)) => void
+}) {
     const [drawerVisible, setDrawerVisible] = useState(false);
     const [selectedTile, setSelectedTile] = useState<SelectedTile | null>(null);
     const [confirmationVisible, setConfirmationVisible] = useState(false);

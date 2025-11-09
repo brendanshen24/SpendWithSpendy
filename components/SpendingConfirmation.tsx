@@ -292,7 +292,7 @@ export default function SpendingConfirmation({
         try {
             if (Platform.OS === 'ios') {
                 await NfcManager.registerTagEvent({
-                    alertMessage: 'Tap Spendy!'
+                    alertMessage: 'Tap Spendy to pay!'
                 });
                 
                 await new Promise<void>((resolve) => {
@@ -382,7 +382,7 @@ export default function SpendingConfirmation({
                                 color: '#1F1B15',
                             }}
                         >
-                            Scan NFC to confirm purchase
+                            Are you sure sure?
                         </Text>
                         <Pressable
                             onPress={startNFCScan}
@@ -403,7 +403,7 @@ export default function SpendingConfirmation({
                                     textAlign: 'center',
                                 }}
                             >
-                                {scanning ? 'Scanning...' : 'Tap to Scan'}
+                                {scanning ? 'Scanning...' : 'Yes!'}
                             </Text>
                         </Pressable>
                     </View>
