@@ -92,28 +92,28 @@ export default function Store({balance, setBalance, setTabState}: {
 
             <View className={"bg-[#E2E6EA] p-[11px] rounded-[8px] mt-2"}>
                 <Tile
-                    iconPath={require('../assets/Valorant.jpg')}
-                    title={"Valorant"}
-                    sub={"RIOT GAMES"}
+                    iconPath={require('../assets/amazon.png')}
+                    title={"Amazon"}
+                    sub={"$5 - $100"}
                     sideIconPath={require('../assets/money.png')}
                     sideIconWidth={12}
-                    onPress={() => openFor({ title: 'Valorant', sub: 'RIOT GAMES', icon: require('../assets/Valorant.jpg'), side: require('../assets/money.png') })}
+                    onPress={() => openFor({ title: 'Amazon', sub: '$5 - $100', icon: require('../assets/amazon.png'), side: require('../assets/money.png') })}
                 />
                 <Tile
-                    iconPath={require('../assets/roblox.png')}
-                    title={"Roblox"}
-                    sub={"ROBLOX CORP."}
+                    iconPath={require('../assets/walmart.jpg')}
+                    title={"Walmart"}
+                    sub={"$5 - $100"}
                     sideIconPath={require('../assets/money.png')}
                     sideIconWidth={12}
-                    onPress={() => openFor({ title: 'Roblox', sub: 'ROBLOX CORP.', icon: require('../assets/roblox.png'), side: require('../assets/money.png') })}
+                    onPress={() => openFor({ title: 'Walmart', sub: '$5 - $100', icon: require('../assets/walmart.jpg'), side: require('../assets/money.png') })}
                 />
                 <Tile
-                    iconPath={require('../assets/minecraft.jpg')}
-                    title={"Minecraft"}
-                    sub={"MOJANG STUDIOS"}
+                    iconPath={require('../assets/apple.jpg')}
+                    title={"Apple"}
+                    sub={"$5 - $100"}
                     sideIconPath={require('../assets/money.png')}
                     sideIconWidth={12}
-                    onPress={() => openFor({ title: 'Minecraft', sub: 'MOJANG STUDIOS', icon: require('../assets/minecraft.jpg'), side: require('../assets/money.png') })}
+                    onPress={() => openFor({ title: 'Apple', sub: '$5 - $100', icon: require('../assets/apple.jpg'), side: require('../assets/money.png') })}
                 />
             </View>
 
