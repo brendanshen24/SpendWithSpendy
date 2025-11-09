@@ -2,19 +2,19 @@ import React from 'react';
 import { Text, View } from 'react-native';
 
 type ScreenContentProps = {
-  path: string;
-  children?: React.ReactNode;
+    path: string;
+    children?: React.ReactNode;
 };
 
 export const ScreenContent = ({ path, children }: ScreenContentProps) => {
-  return (
-    <View className={styles.container}>
-      {children}
-    </View>
-  );
+    return (
+        <View className={styles.container}>
+            {children}
+        </View>
+    );
 };
 const styles = {
-  container: `items-center flex-1 justify-center bg-white`,
-  separator: `h-[1px] my-7 w-4/5 bg-gray-200`,
-  title: `text-xl font-bold`,
+    container: `items-center flex-1 justify-center bg-white`,
+    separator: `h-[1px] my-7 w-4/5 bg-gray-200`,
+    title: `text-xl font-bold`,
 };

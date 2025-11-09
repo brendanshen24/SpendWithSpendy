@@ -3,6 +3,10 @@
     "name": "SpendWithSpendy",
     "slug": "SpendWithSpendy",
     "version": "1.0.0",
+    "fonts": {
+      "SF-Pro-Text-Regular": "./assets/fonts/SF-Pro-Text-Regular.woff",
+      "SF-Pro-Text-Bold": "./assets/fonts/SF-Pro-Text-Bold.woff"
+    },
 
     "web": {
       "favicon": "./assets/favicon.png"

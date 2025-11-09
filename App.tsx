@@ -1,56 +1,29 @@
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons } from '@expo/vector-icons';
-import NFCScanner from 'components/NFCScanner';
-
-import HomeScreen from './pages/homePage';
-import CartScreen from './pages/shoppingCartPage';
-import SettingsScreen from './pages/settingsScreen';
-
-export type RootTabParamList = {
-    Home: undefined;
-    Cart: undefined;
-    Settings: undefined;
-};
-
-const Tab = createBottomTabNavigator<RootTabParamList>();
+import './global.css';
+import { useState } from 'react';
+import Money from "pages/Money";
+import {Text, View} from "react-native";
+import TabSelector from "./components/TabSelector";
+import Store from "pages/Store";
 
 export default function App() {
+    const [balance, setBalance] = useState(0);
+    const [tabState, setTabState] = useState('Money');
+
     return (
-        <NavigationContainer>
-            <Tab.Navigator
-                screenOptions={({ route }) => ({
-                    headerShown: false,
-                    tabBarStyle: { backgroundColor: '#fff', height: 60 },
-                    tabBarLabelStyle: { fontSize: 13 },
-                    tabBarIcon: ({ color, size }) => {
-                        let iconName: keyof typeof Ionicons.glyphMap;
+        <>
+            <View className='font-sf-pro-regular'>
+                {/*Spacer*/}
+                <View className="flex w-full h-[100px]"></View>
 
-                        switch (route.name) {
-                            case 'Home':
-                                iconName = 'home';
-                                break;
-                            case 'Cart':
-                                iconName = 'cart';
-                                break;
-                            case 'Settings':
-                                iconName = 'settings';
-                                break;
-                            default:
-                                iconName = 'ellipse';
-                        }
+                {/*Money/Store selector*/}
+                <View className="flex flex-row justify-center items-center py-[11px]">
+                    <TabSelector selectedTab={tabState} setSelectedTab={setTabState} />
+                </View>
 
-                        return <Ionicons name={iconName} size={size} color={color} />;
-                    },
-                    tabBarActiveTintColor: '#007aff',
-                    tabBarInactiveTintColor: 'gray',
-                })}
-            >
-                <Tab.Screen name="Home" component={HomeScreen} />
-                <Tab.Screen name="Cart" component={CartScreen} />
-                <Tab.Screen name="Settings" component={SettingsScreen} />
-            </Tab.Navigator>
-        </NavigationContainer>
+                <Money balance={balance} setBalance={setBalance}/>
+
+                <Store/>
+            </View>
+        </>
     );
 }

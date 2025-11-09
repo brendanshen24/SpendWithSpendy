@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Alert, Platform, Pressable, ScrollView, Text, View } from 'react-native';
 import NfcManager, { NfcEvents } from 'react-native-nfc-manager';
 
-
 const Button = ({ title, onPress, disabled }: { title: string; onPress: () => void; disabled?: boolean }) => (
   <Pressable
     accessibilityRole="button"
