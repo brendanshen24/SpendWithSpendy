@@ -72,6 +72,9 @@ importers:
       '@react-native/metro-config':
         specifier: latest
         version: 0.82.1(@babel/core@7.28.5)
+      '@types/matter-js':
+        specifier: ^0.20.2
+        version: 0.20.2
       '@types/react':
         specifier: ~18.2.79
         version: 18.2.79
@@ -1109,6 +1112,9 @@ packages:
 
   '@types/json5@0.0.29':
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
+
+  '@types/matter-js@0.20.2':
+    resolution: {integrity: sha512-3PPKy3QxvZ89h9+wdBV2488I1JLVs7DEpIkPvgO8JC1mUdiVSO37ZIvVctOTD7hIq8OAL2gJ3ugGSuUip6DhCw==}
 
   '@types/node@24.10.0':
     resolution: {integrity: sha512-qzQZRBqkFsYyaSWXuEHc2WR9c0a0CXwiE5FWUvn7ZM+vdy1uZLfCunD38UzhuB7YN/J11ndbDBcTmOdxJo9Q7A==}
@@ -6089,6 +6095,8 @@ snapshots:
   '@types/json-schema@7.0.15': {}
 
   '@types/json5@0.0.29': {}
+
+  '@types/matter-js@0.20.2': {}
 
   '@types/node@24.10.0':
     dependencies:

@@ -34,6 +34,7 @@
     "@babel/core": "^7.20.0",
     "@react-native-community/cli": "latest",
     "@react-native/metro-config": "latest",
+    "@types/matter-js": "^0.20.2",
     "@types/react": "~18.2.79",
     "@types/react-native": "^0.73.0",
     "@types/react-native-linear-gradient": "^2.4.0",
