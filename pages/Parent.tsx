@@ -200,7 +200,7 @@ const ParentDashboard = ({ balance, setBalance }: { balance: number, setBalance?
                     iconPath={require('../assets/reload.png')}
                     title={"Reload Card"}
                     sub={"ADD FUNDS TO CARD"}
-                    sideIconPath={require('../assets/addfunds.png')}
+                    sideIconPath={require('../assets/money.png')}
                     onPress={() => openFor({ title: 'Reload Card', sub: 'ADD FUNDS TO CARD', icon: require('../assets/reload.png'), side: require('../assets/addfunds.png') })}
                 />
             </View>
@@ -230,6 +230,7 @@ const ParentDashboard = ({ balance, setBalance }: { balance: number, setBalance?
                     iconPath={require('../assets/Valorant.jpg')}
                     title={"475 Valorant Points"}
                     sub={"$5.00 | NOVEMBER 8TH"}
+
                 />
                 <Tile
                     iconPath={require('../assets/roblox.png')}

@@ -16,77 +16,18 @@ const SPACING = 10;
 const FaceDecal: React.FC<{ size: number }> = ({ size }) => {
     return (
         <Svg width={size} height={size} viewBox="0 0 60 60" fill="none" style={{ position: 'absolute' }}>
-            {/* Green circle background (part of the logo decal) */}
             <Circle cx="30" cy="30" r="30" fill="#27E76B" />
-            {/* Left eye */}
             <Circle cx="15.5273" cy="24.9262" r="2.92619" fill="black" />
-            <Ellipse
-                cx="12.565"
-                cy="33.0289"
-                rx="1.33665"
-                ry="0.841597"
-                transform="rotate(-14.3513 12.565 33.0289)"
-                fill="black"
-            />
-            <Ellipse
-                cx="11.5035"
-                cy="35.9352"
-                rx="1.33665"
-                ry="0.841597"
-                transform="rotate(-14.3513 11.5035 35.9352)"
-                fill="black"
-            />
-            <Ellipse
-                cx="15.5496"
-                cy="34.7794"
-                rx="1.33665"
-                ry="0.841597"
-                transform="rotate(-14.3513 15.5496 34.7794)"
-                fill="black"
-            />
-            <Ellipse
-                cx="1.33665"
-                cy="0.841597"
-                rx="1.33665"
-                ry="0.841597"
-                transform="matrix(-0.968794 -0.247866 -0.247866 0.968794 48.9385 32.5449)"
-                fill="black"
-            />
-            <Ellipse
-                cx="1.33665"
-                cy="0.841597"
-                rx="1.33665"
-                ry="0.841597"
-                transform="matrix(-0.968794 -0.247866 -0.247866 0.968794 50 35.4512)"
-                fill="black"
-            />
-            <Ellipse
-                cx="1.33665"
-                cy="0.841597"
-                rx="1.33665"
-                ry="0.841597"
-                transform="matrix(-0.968794 -0.247866 -0.247866 0.968794 45.9539 34.2954)"
-                fill="black"
-            />
+            <Ellipse cx="12.565" cy="33.0289" rx="1.33665" ry="0.841597" transform="rotate(-14.3513 12.565 33.0289)" fill="black" />
+            <Ellipse cx="11.5035" cy="35.9352" rx="1.33665" ry="0.841597" transform="rotate(-14.3513 11.5035 35.9352)" fill="black" />
+            <Ellipse cx="15.5496" cy="34.7794" rx="1.33665" ry="0.841597" transform="rotate(-14.3513 15.5496 34.7794)" fill="black" />
+            <Ellipse cx="1.33665" cy="0.841597" rx="1.33665" ry="0.841597" transform="matrix(-0.968794 -0.247866 -0.247866 0.968794 48.9385 32.5449)" fill="black" />
+            <Ellipse cx="1.33665" cy="0.841597" rx="1.33665" ry="0.841597" transform="matrix(-0.968794 -0.247866 -0.247866 0.968794 50 35.4512)" fill="black" />
+            <Ellipse cx="1.33665" cy="0.841597" rx="1.33665" ry="0.841597" transform="matrix(-0.968794 -0.247866 -0.247866 0.968794 45.9539 34.2954)" fill="black" />
             <Circle cx="44.5002" cy="24.9262" r="2.92619" fill="black" />
-            <Path
-                d="M30.9034 31.1479C30.4179 31.5078 29.754 31.5078 29.2684 31.1479L25.6039 28.4313C24.541 27.6433 25.0983 25.9557 26.4214 25.9557L33.7504 25.9557C35.0736 25.9557 35.6309 27.6433 34.5679 28.4313L30.9034 31.1479Z"
-                fill="black"
-            />
-            <Path
-                d="M30.0137 29.0806V32.9822C30.0137 32.9822 28.5325 39.1235 23.1859 36.378"
-                stroke="black"
-                strokeWidth="1.80629"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
-            <Path
-                d="M30.0859 29.0806V32.9822C30.0859 32.9822 31.5671 39.1235 36.9137 36.378"
-                stroke="black"
-                strokeWidth="1.80629"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
+            <Path d="M30.9034 31.1479C30.4179 31.5078 29.754 31.5078 29.2684 31.1479L25.6039 28.4313C24.541 27.6433 25.0983 25.9557 26.4214 25.9557L33.7504 25.9557C35.0736 25.9557 35.6309 27.6433 34.5679 28.4313L30.9034 31.1479Z" fill="black" />
+            <Path d="M30.0137 29.0806V32.9822C30.0137 32.9822 28.5325 39.1235 23.1859 36.378" stroke="black" strokeWidth="1.80629" strokeLinecap="round" strokeLinejoin="round" />
+            <Path d="M30.0859 29.0806V32.9822C30.0859 32.9822 31.5671 39.1235 36.9137 36.378" stroke="black" strokeWidth="1.80629" strokeLinecap="round" strokeLinejoin="round" />
         </Svg>
     );
 };
@@ -106,17 +47,16 @@ interface DisappearingBallProps {
 }
 
 const DisappearingBall: React.FC<DisappearingBallProps> = ({
-    index,
-    totalBalls,
-    containerHeight,
-    startDisappear,
-}) => {
+                                                               index,
+                                                               totalBalls,
+                                                               containerHeight,
+                                                               startDisappear,
+                                                           }) => {
     const translateY = useSharedValue(-BALL_SIZE);
     const translateX = useSharedValue(0);
     const opacity = useSharedValue(1);
     const scale = useSharedValue(1);
 
-    // Calculate grid position same as Ball component
     const ballsPerRow = Math.floor(SCREEN_WIDTH / (BALL_SIZE + SPACING));
     const row = Math.floor(index / ballsPerRow);
     const col = index % ballsPerRow;
@@ -126,10 +66,8 @@ const DisappearingBall: React.FC<DisappearingBallProps> = ({
     const gridX = startX + col * (BALL_SIZE + SPACING);
     const gridY = containerHeight - BALL_SIZE - row * (BALL_SIZE + SPACING) - SPACING;
 
-    // Initial drop animation
     useEffect(() => {
         if (containerHeight <= 0) return;
-
         const dropDelay = index * 80;
 
         setTimeout(() => {
@@ -141,26 +79,20 @@ const DisappearingBall: React.FC<DisappearingBallProps> = ({
         }, dropDelay);
     }, [containerHeight, gridY, gridX, index]);
 
-    // Disappearing animation
     useEffect(() => {
         if (!startDisappear || containerHeight <= 0) return;
 
-        // Calculate delay based on column position (rightmost balls disappear first)
         const ballsPerRow = Math.floor(SCREEN_WIDTH / (BALL_SIZE + SPACING));
         const row = Math.floor(index / ballsPerRow);
         const col = index % ballsPerRow;
-        // Rightmost column has highest priority (disappears first)
-        // Calculate from right: rightmost col in row has highest col index
         const colsInRow = Math.min(ballsPerRow, totalBalls - row * ballsPerRow);
-        const colFromRight = colsInRow - 1 - col; // 0 = rightmost, increases going left
-        
-        // Wait for all balls to drop, then start disappearing from right
-        const settleTime = 1500 + (totalBalls * 80); // Time for all balls to drop
-        const staggerDelay = colFromRight * 120; // Rightmost balls disappear first
+        const colFromRight = colsInRow - 1 - col;
+
+        const settleTime = 1500 + (totalBalls * 80);
+        const staggerDelay = colFromRight * 120;
         const totalDelay = settleTime + staggerDelay;
 
         setTimeout(() => {
-            // Animate to the left and fade out
             const endX = gridX - SCREEN_WIDTH - BALL_SIZE * 2;
 
             translateX.value = withTiming(endX, {
@@ -233,24 +165,24 @@ const DisappearingBall: React.FC<DisappearingBallProps> = ({
 };
 
 export default function SpendingConfirmation({
-    visible,
-    amount,
-    onConfirm,
-    onClose,
-}: SpendingConfirmationProps) {
+                                                 visible,
+                                                 amount,
+                                                 onConfirm,
+                                                 onClose,
+                                             }: SpendingConfirmationProps) {
     const [containerHeight, setContainerHeight] = useState(0);
     const [startAnimation, setStartAnimation] = useState(false);
     const [showNFCScanner, setShowNFCScanner] = useState(false);
     const [scanning, setScanning] = useState(false);
+    const [showSureImage, setShowSureImage] = useState(false); // ✅ new state
     const ballsToShow = Math.floor(amount);
     const ballIndices = Array.from({ length: ballsToShow }, (_, i) => i);
 
-    // Initialize NFC manager
     useEffect(() => {
         if (visible) {
             NfcManager.start();
         }
-        
+
         return () => {
             try {
                 NfcManager.cancelTechnologyRequest();
@@ -261,7 +193,6 @@ export default function SpendingConfirmation({
 
     useEffect(() => {
         if (visible && containerHeight > 0) {
-            // Start animation after a brief delay to let balls render
             const timer = setTimeout(() => {
                 setStartAnimation(true);
             }, 500);
@@ -275,13 +206,12 @@ export default function SpendingConfirmation({
 
     const handleOkayClick = () => {
         setShowNFCScanner(true);
+        setShowSureImage(true); // ✅ change image when button pressed
     };
 
     const handleNFCSuccess = useCallback(() => {
         setScanning(false);
-        // Deduct the balance after successful NFC scan
         onConfirm();
-        // Close the confirmation view
         onClose();
     }, [onConfirm, onClose]);
 
@@ -291,35 +221,35 @@ export default function SpendingConfirmation({
 
         try {
             if (Platform.OS === 'ios') {
-                await NfcManager.registerTagEvent({
-                    alertMessage: 'Tap Spendy to pay!'
-                });
-                
+                await NfcManager.registerTagEvent({ alertMessage: 'Tap Spendy to pay!' });
+
                 await new Promise<void>((resolve) => {
                     NfcManager.setEventListener(NfcEvents.DiscoverTag, () => {
-                        // NFC scan successful
                         handleNFCSuccess();
                         resolve();
                     });
                 });
             } else {
-                // On Android, just detect any tag
                 await NfcManager.requestTechnology(['android.nfc.tech.IsoDep' as any]);
                 handleNFCSuccess();
             }
-
         } catch (e: any) {
-            // Only show error if it's not a cancel
             if (e?.message && !/cancel/i.test(e.message)) {
                 Alert.alert('NFC Error', String(e.message));
             }
             setScanning(false);
         } finally {
-            try { 
+            try {
                 await NfcManager.cancelTechnologyRequest();
             } catch {}
         }
     }, [scanning, handleNFCSuccess]);
+
+    useEffect(() => {
+        if (!visible) {
+            setShowSureImage(false); // reset image when modal closes
+        }
+    }, [visible]);
 
     if (!visible) {
         return null;
@@ -333,11 +263,18 @@ export default function SpendingConfirmation({
                 </Text>
             </View>
 
+            <Image
+                source={
+                    showSureImage
+                        ? require('../assets/sure.png')   // ✅ conditional image
+                        : require('../assets/lose.png')
+                }
+                className={"size-96 mx-auto"}
+            />
+
             <View
                 style={{ flex: 1, overflow: 'hidden', marginBottom: 30 }}
-                onLayout={(event) => {
-                    setContainerHeight(event.nativeEvent.layout.height);
-                }}
+                onLayout={(event) => setContainerHeight(event.nativeEvent.layout.height)}
             >
                 {containerHeight > 0 && ballIndices.map((index) => (
                     <DisappearingBall
@@ -412,4 +349,3 @@ export default function SpendingConfirmation({
         </View>
     );
 }
-

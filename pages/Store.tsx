@@ -116,7 +116,6 @@ export default function Store({balance, setBalance, setTabState}: {
                     title={"Amazon"}
                     sub={"$5 - $100"}
                     sideIconPath={require('../assets/money.png')}
-                    sideIconWidth={12}
                     onPress={() => openFor({ title: 'Amazon', sub: '$5 - $100', icon: require('../assets/amazon.png'), side: require('../assets/money.png') })}
                 />
                 <Tile
@@ -124,7 +123,6 @@ export default function Store({balance, setBalance, setTabState}: {
                     title={"Walmart"}
                     sub={"$5 - $100"}
                     sideIconPath={require('../assets/money.png')}
-                    sideIconWidth={12}
                     onPress={() => openFor({ title: 'Walmart', sub: '$5 - $100', icon: require('../assets/walmart.jpg'), side: require('../assets/money.png') })}
                 />
                 <Tile
@@ -132,7 +130,6 @@ export default function Store({balance, setBalance, setTabState}: {
                     title={"Apple"}
                     sub={"$5 - $100"}
                     sideIconPath={require('../assets/money.png')}
-                    sideIconWidth={12}
                     onPress={() => openFor({ title: 'Apple', sub: '$5 - $100', icon: require('../assets/apple.jpg'), side: require('../assets/money.png') })}
                 />
             </View>
@@ -154,42 +151,42 @@ export default function Store({balance, setBalance, setTabState}: {
                         </View>
                         <View className={"bg-[#E2E6EA] p-[11px] rounded-[8px] mt-2"}>
                             <Tile
-                                iconPath={require('../assets/valorant2.png')}
+                                iconPath={selectedTile.icon}
                                 title={`475 ${selectedTile.title} Points`}
                                 sub={"$5.00"}
                                 sideIconPath={require('../assets/money.png')}
                                 onPress={() => handlePointClick("$5.00")}
                             />
                             <Tile
-                                iconPath={require('../assets/valorant2.png')}
+                                iconPath={selectedTile.icon}
                                 title={`950 ${selectedTile.title} Points`}
                                 sub={"$10.00"}
                                 sideIconPath={require('../assets/money.png')}
                                 onPress={() => handlePointClick("$10.00")}
                             />
                             <Tile
-                                iconPath={require('../assets/valorant2.png')}
+                                iconPath={selectedTile.icon}
                                 title={`1900 ${selectedTile.title} Points`}
                                 sub={"$20.00"}
                                 sideIconPath={require('../assets/money.png')}
                                 onPress={() => handlePointClick("$20.00")}
                             />
                             <Tile
-                                iconPath={require('../assets/valorant2.png')}
+                                iconPath={selectedTile.icon}
                                 title={`3325 ${selectedTile.title} Points`}
                                 sub={"$35.00"}
                                 sideIconPath={require('../assets/money.png')}
                                 onPress={() => handlePointClick("$35.00")}
                             />
                             <Tile
-                                iconPath={require('../assets/valorant2.png')}
+                                iconPath={selectedTile.icon}
                                 title={`4750 ${selectedTile.title} Points`}
                                 sub={"$50.00"}
                                 sideIconPath={require('../assets/money.png')}
                                 onPress={() => handlePointClick("$50.00")}
                             />
                             <Tile
-                                iconPath={require('../assets/valorant2.png')}
+                                iconPath={selectedTile.icon}
                                 title={`9500 ${selectedTile.title} Points`}
                                 sub={"$100.00"}
                                 sideIconPath={require('../assets/money.png')}
