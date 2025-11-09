@@ -189,9 +189,9 @@ const ParentDashboard = ({ balance, setBalance }: { balance: number, setBalance?
     }, [scanning, balance, setBalance]);
 
     return (
-        <View style={{ flex: 1 }} className={"items-center"}>
-            <View style={{ paddingVertical: 20 }}>
-                <Text className="text-[86px] font-semibold text-center">
+        <View style={{ flex: 1 }} className={"items-start p-[22px]"}>
+            <View style={{ paddingVertical: 20, alignItems: 'center', width: '100%' }}>
+                <Text className="text-[86px] font-semibold items-center text-center">
                     ${balance}
                 </Text>
             </View>
@@ -201,11 +201,10 @@ const ParentDashboard = ({ balance, setBalance }: { balance: number, setBalance?
                     title={"Reload Card"}
                     sub={"ADD FUNDS TO CARD"}
                     sideIconPath={require('../assets/addfunds.png')}
-                    sideIconWidth={12}
                     onPress={() => openFor({ title: 'Reload Card', sub: 'ADD FUNDS TO CARD', icon: require('../assets/reload.png'), side: require('../assets/addfunds.png') })}
                 />
             </View>
-            <Text className={"text-[24px] font-semibold text-center mt-4"}>
+            <Text className={"text-[24px] font-semibold text-center mt-4 pb-[19px]"}>
                 Account Info
             </Text>
             <View className={"bg-[#E2E6EA] p-[11px] rounded-[8px]"}>
@@ -214,16 +213,33 @@ const ParentDashboard = ({ balance, setBalance }: { balance: number, setBalance?
                     title={"Payment Type"}
                     sub={"MASTERCARD ENDING IN 3086"}
                     sideIconPath={require('../assets/arrow.png')}
-                    sideIconWidth={12}
-                    onPress={() => openFor({ title: 'Payment Type', sub: 'MASTERCARD ENDING IN 3086', icon: require('../assets/mastercard.png'), side: require('../assets/arrow.png') })}
                 />
                 <Tile
                     iconPath={require('../assets/mastercard.png')}
                     title={"Hidden Items"}
                     sub={"PRODUCTS YOU CHOOSE TO HIDE"}
                     sideIconPath={require('../assets/arrow.png')}
-                    sideIconWidth={12}
-                    onPress={() => openFor({ title: 'Payment Type', sub: 'MASTERCARD ENDING IN 3086', icon: require('../assets/mastercard.png'), side: require('../assets/arrow.png') })}
+                />
+            </View>
+
+            <Text className={"text-[24px] font-semibold text-center mt-4 pb-[19px]"}>
+                Transaction History
+            </Text>
+            <View className={"bg-[#E2E6EA] p-[11px] rounded-[8px]"}>
+                <Tile
+                    iconPath={require('../assets/Valorant.jpg')}
+                    title={"475 Valorant Points"}
+                    sub={"$5.00 | NOVEMBER 8TH"}
+                />
+                <Tile
+                    iconPath={require('../assets/roblox.png')}
+                    title={"10 Robux"}
+                    sub={"$2 | OCTOBER 30TH"}
+                />
+                <Tile
+                    iconPath={require('../assets/roblox.png')}
+                    title={"10 Robux"}
+                    sub={"$2 | OCTOBER 30TH"}
                 />
             </View>
 
@@ -246,7 +262,7 @@ const ParentDashboard = ({ balance, setBalance }: { balance: number, setBalance?
                                             placeholder="0.00"
                                             keyboardType="numeric"
                                             className="flex-1 text-lg"
-                                            style={{ lineHeight: 24 }}  // ✅ perfectly centers placeholder
+                                            style={{ lineHeight: 24 }} 
                                         />
 
 

@@ -158,7 +158,6 @@ export default function Store({balance, setBalance, setTabState}: {
                                 title={`475 ${selectedTile.title} Points`}
                                 sub={"$5.00"}
                                 sideIconPath={require('../assets/money.png')}
-                                sideIconWidth={12}
                                 onPress={() => handlePointClick("$5.00")}
                             />
                             <Tile
@@ -166,7 +165,6 @@ export default function Store({balance, setBalance, setTabState}: {
                                 title={`950 ${selectedTile.title} Points`}
                                 sub={"$10.00"}
                                 sideIconPath={require('../assets/money.png')}
-                                sideIconWidth={12}
                                 onPress={() => handlePointClick("$10.00")}
                             />
                             <Tile
@@ -174,7 +172,6 @@ export default function Store({balance, setBalance, setTabState}: {
                                 title={`1900 ${selectedTile.title} Points`}
                                 sub={"$20.00"}
                                 sideIconPath={require('../assets/money.png')}
-                                sideIconWidth={12}
                                 onPress={() => handlePointClick("$20.00")}
                             />
                             <Tile
@@ -182,7 +179,6 @@ export default function Store({balance, setBalance, setTabState}: {
                                 title={`3325 ${selectedTile.title} Points`}
                                 sub={"$35.00"}
                                 sideIconPath={require('../assets/money.png')}
-                                sideIconWidth={12}
                                 onPress={() => handlePointClick("$35.00")}
                             />
                             <Tile
@@ -190,7 +186,6 @@ export default function Store({balance, setBalance, setTabState}: {
                                 title={`4750 ${selectedTile.title} Points`}
                                 sub={"$50.00"}
                                 sideIconPath={require('../assets/money.png')}
-                                sideIconWidth={12}
                                 onPress={() => handlePointClick("$50.00")}
                             />
                             <Tile
@@ -198,7 +193,6 @@ export default function Store({balance, setBalance, setTabState}: {
                                 title={`9500 ${selectedTile.title} Points`}
                                 sub={"$100.00"}
                                 sideIconPath={require('../assets/money.png')}
-                                sideIconWidth={12}
                                 onPress={() => handlePointClick("$100.00")}
                             />
                         </View>
