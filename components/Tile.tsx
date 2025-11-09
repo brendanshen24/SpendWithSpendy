@@ -7,6 +7,7 @@ type TileProps = {
     sub: string;
     sideIconPath: any;
     onPress?: () => void;
+    sideIconWidth: number;
 };
 
 export default function Tile({ iconPath, title, sub, sideIconPath, onPress }: TileProps) {

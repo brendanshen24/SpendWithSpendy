@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef } from 'react';
-import { Animated, Dimensions, Easing, Modal, Pressable, StyleSheet, View } from 'react-native';
+import { Animated, Dimensions, Easing, Modal, PanResponder, Pressable, StyleSheet, View } from 'react-native';
 
 export type BottomDrawerProps = {
   visible: boolean;
@@ -13,6 +13,8 @@ export type BottomDrawerProps = {
 };
 
 const SCREEN_H = Dimensions.get('window').height;
+const DRAG_THRESHOLD = 100; // pixels to drag before closing
+const CLOSE_THRESHOLD = 0.3; // fraction of height to drag before closing
 
 export default function BottomDrawer({
   visible,
@@ -30,41 +32,120 @@ export default function BottomDrawer({
   }, [height]);
 
   const translateY = useRef(new Animated.Value(resolvedHeight)).current;
-  const backdropOpacity = useRef(new Animated.Value(0)).current;
+  const dragY = useRef(new Animated.Value(0)).current;
+  const isDragging = useRef(false);
+  const backdropPressEnabled = useRef(true);
+
+  // Combine the base translateY with the drag offset
+  const combinedTranslateY = useRef(
+    Animated.add(translateY, dragY)
+  ).current;
+
+  // Interpolate backdrop opacity based on drawer position
+  const backdropOpacity = combinedTranslateY.interpolate({
+    inputRange: [0, resolvedHeight],
+    outputRange: [1, 0],
+    extrapolate: 'clamp',
+  });
+
+  const panResponder = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponder: (_, gestureState) => {
+        // Only respond to vertical drags
+        return Math.abs(gestureState.dy) > 5;
+      },
+      onPanResponderGrant: () => {
+        isDragging.current = true;
+        backdropPressEnabled.current = false;
+        // Reset drag offset to start fresh
+        dragY.setOffset(0);
+        dragY.setValue(0);
+      },
+      onPanResponderMove: (_, gestureState) => {
+        // Only allow dragging down (positive dy)
+        if (gestureState.dy > 0) {
+          dragY.setValue(gestureState.dy);
+        } else {
+          // Allow slight resistance when dragging up, but don't move the drawer up
+          dragY.setValue(0);
+        }
+      },
+      onPanResponderRelease: (_, gestureState) => {
+        const currentDrag = gestureState.dy;
+        isDragging.current = false;
+        
+        // Re-enable backdrop press after a short delay
+        setTimeout(() => {
+          backdropPressEnabled.current = true;
+        }, 100);
+
+        dragY.flattenOffset();
+
+        const shouldClose = currentDrag > DRAG_THRESHOLD || currentDrag > resolvedHeight * CLOSE_THRESHOLD;
+
+        if (shouldClose) {
+          // Close the drawer
+          Animated.parallel([
+            Animated.timing(translateY, {
+              toValue: resolvedHeight,
+              duration: 220,
+              easing: Easing.in(Easing.cubic),
+              useNativeDriver: true,
+            }),
+            Animated.timing(dragY, {
+              toValue: 0,
+              duration: 220,
+              easing: Easing.in(Easing.cubic),
+              useNativeDriver: true,
+            }),
+          ]).start(() => {
+            dragY.setValue(0);
+            onClose();
+          });
+        } else {
+          // Snap back to open position
+          Animated.spring(dragY, {
+            toValue: 0,
+            useNativeDriver: true,
+            tension: 65,
+            friction: 11,
+          }).start();
+        }
+      },
+      onPanResponderTerminate: () => {
+        isDragging.current = false;
+        backdropPressEnabled.current = true;
+        dragY.flattenOffset();
+        Animated.spring(dragY, {
+          toValue: 0,
+          useNativeDriver: true,
+          tension: 65,
+          friction: 11,
+        }).start();
+      },
+    })
+  ).current;
 
   useEffect(() => {
     if (visible) {
-      Animated.parallel([
-        Animated.timing(translateY, {
-          toValue: 0,
-          duration: 260,
-          easing: Easing.out(Easing.cubic),
-          useNativeDriver: true,
-        }),
-        Animated.timing(backdropOpacity, {
-          toValue: 1,
-          duration: 260,
-          easing: Easing.out(Easing.cubic),
-          useNativeDriver: true,
-        }),
-      ]).start();
+      dragY.setValue(0);
+      Animated.timing(translateY, {
+        toValue: 0,
+        duration: 260,
+        easing: Easing.out(Easing.cubic),
+        useNativeDriver: true,
+      }).start();
     } else {
-      Animated.parallel([
-        Animated.timing(translateY, {
-          toValue: resolvedHeight,
-          duration: 220,
-          easing: Easing.in(Easing.cubic),
-          useNativeDriver: true,
-        }),
-        Animated.timing(backdropOpacity, {
-          toValue: 0,
-          duration: 220,
-          easing: Easing.in(Easing.cubic),
-          useNativeDriver: true,
-        }),
-      ]).start();
+      dragY.setValue(0);
+      Animated.timing(translateY, {
+        toValue: resolvedHeight,
+        duration: 220,
+        easing: Easing.in(Easing.cubic),
+        useNativeDriver: true,
+      }).start();
     }
-  }, [visible, resolvedHeight, translateY, backdropOpacity]);
+  }, [visible, resolvedHeight, translateY, dragY]);
 
   return (
     <Modal transparent visible={visible} animationType="none" onRequestClose={onClose}>
@@ -72,7 +153,11 @@ export default function BottomDrawer({
         pointerEvents={visible ? 'auto' : 'none'}>
         <Pressable
           style={StyleSheet.absoluteFill}
-          onPress={backdropClosable ? onClose : undefined}
+          onPress={() => {
+            if (backdropClosable && backdropPressEnabled.current && !isDragging.current) {
+              onClose();
+            }
+          }}
         >
           <Animated.View style={[styles.backdrop, { opacity: backdropOpacity }]} />
         </Pressable>
@@ -80,8 +165,9 @@ export default function BottomDrawer({
         <Animated.View
           style={[
             styles.sheet,
-            { height: resolvedHeight, transform: [{ translateY }] },
+            { height: resolvedHeight, transform: [{ translateY: combinedTranslateY }] },
           ]}
+          {...panResponder.panHandlers}
         >
           {/* drag handle */}
           <View style={styles.handleBar} />

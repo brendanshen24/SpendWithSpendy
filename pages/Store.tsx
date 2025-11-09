@@ -31,6 +31,7 @@ export default function Store() {
                     title={"Valorant"}
                     sub={"RIOT GAMES"}
                     sideIconPath={require('../assets/arrow.png')}
+                    sideIconWidth={12}
                     onPress={() => openFor({ title: 'Valorant', sub: 'RIOT GAMES', icon: require('../assets/Valorant.jpg'), side: require('../assets/arrow.png') })}
                 />
                 <Tile
@@ -38,6 +39,7 @@ export default function Store() {
                     title={"Roblox"}
                     sub={"ROBLOX CORP."}
                     sideIconPath={require('../assets/arrow.png')}
+                    sideIconWidth={12}
                     onPress={() => openFor({ title: 'Roblox', sub: 'ROBLOX CORP.', icon: require('../assets/roblox.png'), side: require('../assets/arrow.png') })}
                 />
                 <Tile
@@ -45,6 +47,7 @@ export default function Store() {
                     title={"Minecraft"}
                     sub={"MOJANG STUDIOS"}
                     sideIconPath={require('../assets/arrow.png')}
+                    sideIconWidth={12}
                     onPress={() => openFor({ title: 'Minecraft', sub: 'MOJANG STUDIOS', icon: require('../assets/minecraft.jpg'), side: require('../assets/arrow.png') })}
                 />
             </View>
@@ -59,6 +62,7 @@ export default function Store() {
                     title={"Valorant"}
                     sub={"RIOT GAMES"}
                     sideIconPath={require('../assets/money.png')}
+                    sideIconWidth={12}
                     onPress={() => openFor({ title: 'Valorant', sub: 'RIOT GAMES', icon: require('../assets/Valorant.jpg'), side: require('../assets/money.png') })}
                 />
                 <Tile
@@ -66,6 +70,7 @@ export default function Store() {
                     title={"Roblox"}
                     sub={"ROBLOX CORP."}
                     sideIconPath={require('../assets/money.png')}
+                    sideIconWidth={12}
                     onPress={() => openFor({ title: 'Roblox', sub: 'ROBLOX CORP.', icon: require('../assets/roblox.png'), side: require('../assets/money.png') })}
                 />
                 <Tile
@@ -73,6 +78,7 @@ export default function Store() {
                     title={"Minecraft"}
                     sub={"MOJANG STUDIOS"}
                     sideIconPath={require('../assets/money.png')}
+                    sideIconWidth={12}
                     onPress={() => openFor({ title: 'Minecraft', sub: 'MOJANG STUDIOS', icon: require('../assets/minecraft.jpg'), side: require('../assets/money.png') })}
                 />
             </View>

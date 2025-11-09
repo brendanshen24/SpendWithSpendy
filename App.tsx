@@ -6,7 +6,7 @@ import TabSelector from "./components/TabSelector";
 import Store from "pages/Store";
 
 export default function App() {
-    const [balance, setBalance] = useState(5);
+    const [balance, setBalance] = useState(24);
     const [tabState, setTabState] = useState('Money');
 
     return (
