@@ -55,7 +55,7 @@ export default function Store({balance, setBalance, setTabState}: {
 
     return (
         <View className={"flex items-start p-[22px]"}>
-            <Text className={"text-[24px] font-semibold text-center"}>
+            <Text className={"text-[24px] font-semibold text-center pb-[19px]"}>
                 Game Shops
             </Text>
 
@@ -86,11 +86,11 @@ export default function Store({balance, setBalance, setTabState}: {
                 />
             </View>
 
-            <Text className={"text-[24px] font-semibold text-center mt-4"}>
+            <Text className={"text-[24px] font-semibold text-center mt-4 pb-[19px]"}>
                 Gift Cards
             </Text>
 
-            <View className={"bg-[#E2E6EA] p-[11px] rounded-[8px] mt-2"}>
+            <View className={"bg-[#E2E6EA] p-[11px] rounded-[8px]"}>
                 <Tile
                     iconPath={require('../assets/amazon.png')}
                     title={"Amazon"}
