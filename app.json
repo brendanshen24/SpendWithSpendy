@@ -26,6 +26,7 @@
 
     "assetBundlePatterns": ["**/*"],
     "ios": {
+      "icon": "./assets/icon.png",
       "supportsTablet": true,
       "infoPlist": {
         "NFCReaderUsageDescription": "Allow this app to scan NFC tags to read their type and contents."
