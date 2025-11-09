@@ -159,8 +159,6 @@ export const NFCScanner: React.FC = () => {
 
   return (
     <View className="w-11/12 max-w-xl items-stretch">
-      <Text className="text-lg font-semibold mb-2">NFC Scanner</Text>
-      <Text className="text-gray-700 mb-2">Platform: {Platform.OS.toUpperCase()}</Text>
       {supported === false && (
         <Text className="text-red-600 mb-2">This device does not support NFC.</Text>
       )}
@@ -193,10 +191,6 @@ export const NFCScanner: React.FC = () => {
           )}
         </View>
       )}
-
-      <Text className="text-xs text-gray-500 mt-4">
-        Notes: iOS NFC requires a physical device (not simulator). Some tag technologies may not be supported on all devices.
-      </Text>
     </View>
   );
 };

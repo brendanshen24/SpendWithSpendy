@@ -7,7 +7,7 @@ import './global.css';
 export default function App() {
   return (
     <>
-      <ScreenContent title="Home" path="App.tsx">
+      <ScreenContent path="App.tsx">
         <NFCScanner />
       </ScreenContent>
       <StatusBar style="auto" />
