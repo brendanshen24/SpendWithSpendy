@@ -107,7 +107,7 @@ const PasscodeScreen = ({ onSuccess }: { onSuccess: () => void }) => {
 };
 
 // Parent Dashboard Component
-const ParentDashboard = ({ balance }: { balance: number }) => {
+const ParentDashboard = ({ balance, setBalance }: { balance: number, setBalance: () => void }) => {
     const [drawerVisible, setDrawerVisible] = useState(false);
     const [selectedTile, setSelectedTile] = useState<SelectedTile | null>(null);
     const [confirmationVisible, setConfirmationVisible] = useState(false);
@@ -117,8 +117,8 @@ const ParentDashboard = ({ balance }: { balance: number }) => {
         setDrawerVisible(true);
     };
     return (
-        <View className="flex-1 bg-white justify-center items-center">
-            <View style={{ paddingVertical: 10 }}>
+        <View style={{ flex: 1 }} className={"items-center"}>
+            <View style={{ paddingVertical: 20 }}>
                 <Text className="text-[86px] font-semibold text-center">
                     ${balance}
                 </Text>
@@ -160,7 +160,7 @@ const ParentDashboard = ({ balance }: { balance: number }) => {
 };
 
 // Main Parent Component
-export default function Parent({ balance, setBalance }: { balance: number, setBalance?: (balance: number) => void }) {
+export default function Parent({ balance, setBalance, setTabState }: { balance: number, setBalance?: (balance: number) => void, setTabState:(tabState: string) => void }) {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     return (
@@ -168,7 +168,7 @@ export default function Parent({ balance, setBalance }: { balance: number, setBa
             {!isAuthenticated ? (
                 <PasscodeScreen onSuccess={() => setIsAuthenticated(true)} />
             ) : (
-                <ParentDashboard balance={balance} />
+                <ParentDashboard balance={balance} setBalance={setBalance} />
             )}
         </View>
     );

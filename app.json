@@ -7,11 +7,9 @@
       "SF-Pro-Text-Regular": "./assets/fonts/SF-Pro-Text-Regular.woff",
       "SF-Pro-Text-Bold": "./assets/fonts/SF-Pro-Text-Bold.woff"
     },
-
     "web": {
       "favicon": "./assets/favicon.png"
     },
-
     "experiments": {
       "tsconfigPaths": true
     },
@@ -25,18 +23,23 @@
     ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-
     "userInterfaceStyle": "light",
-
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "icon": "./assets/icon.png",
       "supportsTablet": true,
       "infoPlist": {
-        "NFCReaderUsageDescription": "Allow this app to scan NFC tags to read their type and contents."
+        "NFCReaderUsageDescription": "Allow this app to scan NFC tags to read their type and contents.",
+        "ITSAppUsesNonExemptEncryption": false
       },
       "entitlements": {
         "com.apple.developer.nfc.readersession.formats": [
+          "NDEF",
+          "TAG",
+          "NDEF",
+          "TAG",
           "NDEF",
           "TAG",
           "NDEF",
@@ -47,7 +50,6 @@
     },
     "android": {
       "permissions": [
-        "android.permission.NFC",
         "android.permission.NFC"
       ],
       "adaptiveIcon": {
@@ -55,6 +57,15 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.Surge.SpendWithSpendy"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "25db5ca5-51d4-41d3-bfd0-937ec7dc9d1f"
+      }
+    },
+    "developmentClient": true,
+    "updates": {
+      "enabled": false
     }
   }
 }
