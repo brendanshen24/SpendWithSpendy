@@ -11,7 +11,7 @@ function TabSelector({
     return (
         <View className="flex flex-row justify-center items-center">
             <TouchableOpacity
-                className={`flex flex-row justify-center items-center py-2 px-4 rounded-l-md ${
+                className={`h-[40px] flex flex-row justify-center items-center py-2 px-4 rounded-l-md ${
                     selectedTab === 'Money' ? 'bg-[#1F1B15]' : 'bg-[#E2E6EA]'
                 }`}
                 onPress={() => setSelectedTab('Money')}
@@ -26,7 +26,7 @@ function TabSelector({
             </TouchableOpacity>
 
             <TouchableOpacity
-                className={`flex flex-row justify-center items-center py-2 px-4 ${
+                className={`h-[40px] flex flex-row justify-center items-center py-2 px-4 ${
                     selectedTab === 'Store' ? 'bg-[#1F1B15]' : 'bg-[#E2E6EA]'
                 }`}
                 onPress={() => setSelectedTab('Store')}
@@ -41,18 +41,19 @@ function TabSelector({
             </TouchableOpacity>
 
             <TouchableOpacity
-                className={`flex flex-row justify-center items-center py-2 px-4 rounded-r-md ${
+                className={`h-[40px] flex flex-row justify-center items-center py-2 px-4 rounded-r-md ${
                     selectedTab === 'Parent' ? 'bg-[#1F1B15]' : 'bg-[#E2E6EA]'
                 }`}
                 onPress={() => setSelectedTab('Parent')}
             >
                 <MaterialIcons
                     name="lock"
-                    size={24}
+                    size={20}  // 24 is too tall relative to your text
                     color={selectedTab === 'Parent' ? '#E2E6EA' : '#4B4D4E'}
                 />
             </TouchableOpacity>
         </View>
+
     );
 }
 
