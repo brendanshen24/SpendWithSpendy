@@ -1,15 +1,16 @@
-// components/Ball.tsx
 import React, { useEffect } from 'react';
 import Animated, {
     useSharedValue,
     useAnimatedStyle,
     withTiming,
     Easing,
+    SharedValue,
 } from 'react-native-reanimated';
+import { Image, Dimensions } from 'react-native';
 
-import { Image } from 'react-native';
-
-const BALL_SIZE = 60; // 60px by 60px
+const BALL_SIZE = 60;
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const SPACING = 10;
 
 interface BallProps {
     index: number;
@@ -18,36 +19,44 @@ interface BallProps {
 }
 
 const Ball: React.FC<BallProps> = ({ index, totalBalls, containerHeight }) => {
-    // Shared value for the ball's Y-position (translation)
-    const translateY = useSharedValue(-BALL_SIZE); // Start off-screen (above)
+    // Initial position calculation (kept the same)
+    const ballsPerRow = Math.floor(SCREEN_WIDTH / (BALL_SIZE + SPACING));
+    const row = Math.floor(index / ballsPerRow);
+    const col = index % ballsPerRow;
 
-    // Calculate the final resting Y position (for stacking)
-    // The bottom-most ball rests at (containerHeight - BALL_SIZE).
-    // Subsequent balls stack up, with a height of BALL_SIZE.
-    const finalY = containerHeight - BALL_SIZE * (totalBalls - index);
+    const totalRowWidth = ballsPerRow * (BALL_SIZE + SPACING);
+    const startX = -totalRowWidth / 2 + BALL_SIZE / 2 + SPACING / 2;
+    const gridX = startX + col * (BALL_SIZE + SPACING);
 
+    // Final Y position in the grid
+    const gridY = containerHeight - BALL_SIZE - row * (BALL_SIZE + SPACING) - SPACING;
+
+    // Shared values for animation
+    const translateY = useSharedValue(-BALL_SIZE); // Start off-screen
+    const translateX = useSharedValue(gridX);     // Start at the correct X
+
+    // Initial drop to grid position
     useEffect(() => {
-        if (containerHeight > 0) {
-            // Delay the start of the animation to make them fall one by one
-            const delay = index * 100;
+        if (containerHeight <= 0) return;
 
-            translateY.value = withTiming(
-                finalY,
-                {
-                    duration: 500 + index * 50, // Longer duration for balls that fall farther
-                    easing: Easing.bounce, // A nice bounce effect for the "stack"
-                },
-                (isFinished) => {
-                    // Optional: you can add a callback when the animation finishes
-                }
-            );
-        }
-    }, [containerHeight, finalY, index, translateY]);
+        const delay = index * 80;
 
+        // Animate down to the final grid position (gridY)
+        setTimeout(() => {
+            translateY.value = withTiming(gridY, {
+                duration: 800,
+                easing: Easing.out(Easing.cubic),
+            });
+        }, delay);
+    }, [containerHeight, gridY, index]);
+
+    // This style is now static after the initial drop
     const animatedStyle = useAnimatedStyle(() => {
         return {
-            // Apply the Y translation for the fall
-            transform: [{ translateY: translateY.value }],
+            transform: [
+                { translateY: translateY.value },
+                { translateX: translateX.value },
+            ],
         };
     });
 
@@ -55,15 +64,18 @@ const Ball: React.FC<BallProps> = ({ index, totalBalls, containerHeight }) => {
         <Animated.View
             style={[
                 {
-                    position: 'absolute', // Allows precise positioning for stacking
+                    position: 'absolute',
                     width: BALL_SIZE,
                     height: BALL_SIZE,
-                    alignSelf: 'center', // Center it horizontally
+                    alignSelf: 'center',
                 },
                 animatedStyle,
             ]}
         >
-            <Image source={require('../assets/ball.png')} style={{ width: BALL_SIZE, height: BALL_SIZE }}/>
+            <Image
+                source={require('../assets/ball.png')}
+                style={{ width: BALL_SIZE, height: BALL_SIZE }}
+            />
         </Animated.View>
     );
 };
