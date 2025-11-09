@@ -4,10 +4,11 @@ import Money from "pages/Money";
 import {Text, View} from "react-native";
 import TabSelector from "./components/TabSelector";
 import Store from "pages/Store";
+import Parent from "pages/Parent";
 
 export default function App() {
     const [balance, setBalance] = useState(24);
-    const [tabState, setTabState] = useState('Money');
+    const [tabState, setTabState] = useState( 'Money');
 
     return (
         <>
@@ -25,7 +26,7 @@ export default function App() {
 
                 {tabState === 'Store' && <Store balance={balance} setBalance={setBalance}/>}
 
-                {tabState === 'Lock' && <View />}
+                {tabState === 'Parent' && <Parent balance={balance} setBalance={setBalance}/>}
             </View>
         </>
     );

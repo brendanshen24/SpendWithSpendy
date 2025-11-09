@@ -7,10 +7,89 @@ import Animated, {
     Easing,
 } from 'react-native-reanimated';
 import NfcManager, { NfcEvents } from 'react-native-nfc-manager';
+import Svg, { Circle, Ellipse, Path } from 'react-native-svg';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const BALL_SIZE = 60;
 const SPACING = 10;
+
+const FaceDecal: React.FC<{ size: number }> = ({ size }) => {
+    return (
+        <Svg width={size} height={size} viewBox="0 0 60 60" fill="none" style={{ position: 'absolute' }}>
+            {/* Green circle background (part of the logo decal) */}
+            <Circle cx="30" cy="30" r="30" fill="#27E76B" />
+            {/* Left eye */}
+            <Circle cx="15.5273" cy="24.9262" r="2.92619" fill="black" />
+            <Ellipse
+                cx="12.565"
+                cy="33.0289"
+                rx="1.33665"
+                ry="0.841597"
+                transform="rotate(-14.3513 12.565 33.0289)"
+                fill="black"
+            />
+            <Ellipse
+                cx="11.5035"
+                cy="35.9352"
+                rx="1.33665"
+                ry="0.841597"
+                transform="rotate(-14.3513 11.5035 35.9352)"
+                fill="black"
+            />
+            <Ellipse
+                cx="15.5496"
+                cy="34.7794"
+                rx="1.33665"
+                ry="0.841597"
+                transform="rotate(-14.3513 15.5496 34.7794)"
+                fill="black"
+            />
+            <Ellipse
+                cx="1.33665"
+                cy="0.841597"
+                rx="1.33665"
+                ry="0.841597"
+                transform="matrix(-0.968794 -0.247866 -0.247866 0.968794 48.9385 32.5449)"
+                fill="black"
+            />
+            <Ellipse
+                cx="1.33665"
+                cy="0.841597"
+                rx="1.33665"
+                ry="0.841597"
+                transform="matrix(-0.968794 -0.247866 -0.247866 0.968794 50 35.4512)"
+                fill="black"
+            />
+            <Ellipse
+                cx="1.33665"
+                cy="0.841597"
+                rx="1.33665"
+                ry="0.841597"
+                transform="matrix(-0.968794 -0.247866 -0.247866 0.968794 45.9539 34.2954)"
+                fill="black"
+            />
+            <Circle cx="44.5002" cy="24.9262" r="2.92619" fill="black" />
+            <Path
+                d="M30.9034 31.1479C30.4179 31.5078 29.754 31.5078 29.2684 31.1479L25.6039 28.4313C24.541 27.6433 25.0983 25.9557 26.4214 25.9557L33.7504 25.9557C35.0736 25.9557 35.6309 27.6433 34.5679 28.4313L30.9034 31.1479Z"
+                fill="black"
+            />
+            <Path
+                d="M30.0137 29.0806V32.9822C30.0137 32.9822 28.5325 39.1235 23.1859 36.378"
+                stroke="black"
+                strokeWidth="1.80629"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
+            <Path
+                d="M30.0859 29.0806V32.9822C30.0859 32.9822 31.5671 39.1235 36.9137 36.378"
+                stroke="black"
+                strokeWidth="1.80629"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
+        </Svg>
+    );
+};
 
 interface SpendingConfirmationProps {
     visible: boolean;
@@ -124,10 +203,31 @@ const DisappearingBall: React.FC<DisappearingBallProps> = ({
                 animatedStyle,
             ]}
         >
-            <Image
-                source={require('../assets/ball.png')}
-                style={{ width: BALL_SIZE, height: BALL_SIZE }}
-            />
+            <View style={{ width: BALL_SIZE, height: BALL_SIZE, position: 'relative' }}>
+                <Image
+                    source={require('../assets/ball.png')}
+                    style={{
+                        width: BALL_SIZE,
+                        height: BALL_SIZE,
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                    }}
+                />
+                <View
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: BALL_SIZE,
+                        height: BALL_SIZE,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                >
+                    <FaceDecal size={BALL_SIZE} />
+                </View>
+            </View>
         </Animated.View>
     );
 };

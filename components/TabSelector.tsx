@@ -42,14 +42,14 @@ function TabSelector({
 
             <TouchableOpacity
                 className={`flex flex-row justify-center items-center py-2 px-4 rounded-r-md ${
-                    selectedTab === 'Lock' ? 'bg-[#1F1B15]' : 'bg-[#E2E6EA]'
+                    selectedTab === 'Parent' ? 'bg-[#1F1B15]' : 'bg-[#E2E6EA]'
                 }`}
-                onPress={() => setSelectedTab('Lock')}
+                onPress={() => setSelectedTab('Parent')}
             >
                 <MaterialIcons
                     name="lock"
                     size={24}
-                    color={selectedTab === 'Lock' ? '#E2E6EA' : '#4B4D4E'}
+                    color={selectedTab === 'Parent' ? '#E2E6EA' : '#4B4D4E'}
                 />
             </TouchableOpacity>
         </View>
