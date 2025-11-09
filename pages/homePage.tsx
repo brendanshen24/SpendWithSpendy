@@ -62,7 +62,10 @@ export default function HomeScreen() {
       </View>
 
       <View className="items-center">
-        <NFCScanner />
+        <NFCScanner onTagDetected={() => {
+          // Do something when a tag is detected
+          console.log('Tag detected!');
+        }} />
       </View>
 
       <View className="flex-1">
