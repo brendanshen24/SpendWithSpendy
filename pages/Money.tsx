@@ -14,6 +14,7 @@ export default function Money({balance, setBalance}:{balance: number, setBalance
             </View>
 
 
+
         {/*    Balls*/}
         </View>
     );
