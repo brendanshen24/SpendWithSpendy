@@ -1,5 +1,5 @@
 import { Text, View, Image } from 'react-native';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Tile from "../components/Tile";
 import BottomDrawer from '../components/BottomDrawer';
 
@@ -83,14 +83,76 @@ export default function Store() {
                 />
             </View>
 
-            <BottomDrawer visible={drawerVisible} onClose={() => setDrawerVisible(false)} height={{ fraction: 0.45 }}>
+            <BottomDrawer visible={drawerVisible} onClose={() => setDrawerVisible(false)} height={634}>
                 {selectedTile ? (
-                    <View className="flex flex-col items-center">
-                        <Image source={selectedTile.icon} className="w-[84px] h-[84px] mb-4" />
-                        <Text className="text-[20px] font-semibold mb-2">{selectedTile.title}</Text>
-                        <Text className="text-[14px] font-light mb-6">{selectedTile.sub}</Text>
-                        {/* Add any actions or details here */}
+                    <View>
+                        <View className="flex flex-row justify-between items-center rounded-[6px] w-[328px]">
+                            <View className={"flex flex-row items-center pl-[10px] py-[10px] gap-[15px]"}>
+                                <Image source={selectedTile.icon} className="w-[42px] h-[42px]" />
+
+                                <View className="flex flex-col justify-center items-start">
+                                    <Text className="text-[16px] font-normal">{selectedTile.title}</Text>
+                                    <Text className="text-[12px] font-light">{selectedTile.sub}</Text>
+                                </View>
+                            </View>
+                            <View className={"flex pr-[22px]"}>
+                            </View>
+                        </View>
+                        <View className={"bg-[#E2E6EA] p-[11px] rounded-[8px] mt-2"}>
+                            <Tile
+                                iconPath={require('../assets/valorant2.png')}
+                                title={"475 Valorant Points"}
+                                sub={"$4.99"}
+                                sideIconPath={require('../assets/money.png')}
+                                sideIconWidth={12}
+                                onPress={() => openFor({ title: 'Valorant', sub: 'RIOT GAMES', icon: require('../assets/Valorant.jpg'), side: require('../assets/money.png') })}
+                            />
+                            <Tile
+                                iconPath={require('../assets/valorant2.png')}
+                                title={"950 Valorant Points"}
+                                sub={"$9.99"}
+                                sideIconPath={require('../assets/money.png')}
+                                sideIconWidth={12}
+                                onPress={() => openFor({ title: 'Roblox', sub: 'ROBLOX CORP.', icon: require('../assets/roblox.png'), side: require('../assets/money.png') })}
+                            />
+                            <Tile
+                                iconPath={require('../assets/valorant2.png')}
+                                title={"1900 Valorant Points"}
+                                sub={"$19.99"}
+                                sideIconPath={require('../assets/money.png')}
+                                sideIconWidth={12}
+                                onPress={() => openFor({ title: 'Minecraft', sub: 'MOJANG STUDIOS', icon: require('../assets/minecraft.jpg'), side: require('../assets/money.png') })}
+                            />
+                            <Tile
+                                iconPath={require('../assets/valorant2.png')}
+                                title={"3325 Valorant Points"}
+                                sub={"$34.99"}
+                                sideIconPath={require('../assets/money.png')}
+                                sideIconWidth={12}
+                                onPress={() => openFor({ title: 'Minecraft', sub: 'MOJANG STUDIOS', icon: require('../assets/minecraft.jpg'), side: require('../assets/money.png') })}
+                            />
+                            <Tile
+                                iconPath={require('../assets/valorant2.png')}
+                                title={"4750 Valorant Points"}
+                                sub={"$49.99"}
+                                sideIconPath={require('../assets/money.png')}
+                                sideIconWidth={12}
+                                onPress={() => openFor({ title: 'Minecraft', sub: 'MOJANG STUDIOS', icon: require('../assets/minecraft.jpg'), side: require('../assets/money.png') })}
+                            />
+                            <Tile
+                                iconPath={require('../assets/valorant2.png')}
+                                title={"9500 Valorant Points"}
+                                sub={"$99.99"}
+                                sideIconPath={require('../assets/money.png')}
+                                sideIconWidth={12}
+                                onPress={() => openFor({ title: 'Minecraft', sub: 'MOJANG STUDIOS', icon: require('../assets/minecraft.jpg'), side: require('../assets/money.png') })}
+                            />
+                        </View>
+
                     </View>
+
+
+
                 ) : (
                     <View />
                 )}

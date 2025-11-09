@@ -24,6 +24,8 @@ export default function App() {
                 {tabState === 'Money' && <Money balance={balance} setBalance={setBalance}/>}
 
                 {tabState === 'Store' && <Store/>}
+
+                {tabState === 'Lock' && <View />}
             </View>
         </>
     );

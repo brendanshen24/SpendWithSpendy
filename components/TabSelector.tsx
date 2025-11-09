@@ -1,4 +1,5 @@
 import { View, Text, TouchableOpacity } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 
 function TabSelector({
                          selectedTab,
@@ -25,7 +26,7 @@ function TabSelector({
             </TouchableOpacity>
 
             <TouchableOpacity
-                className={`flex flex-row justify-center items-center py-2 px-4 rounded-r-md ${
+                className={`flex flex-row justify-center items-center py-2 px-4 ${
                     selectedTab === 'Store' ? 'bg-[#1F1B15]' : 'bg-[#E2E6EA]'
                 }`}
                 onPress={() => setSelectedTab('Store')}
@@ -37,6 +38,19 @@ function TabSelector({
                 >
                     Store
                 </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+                className={`flex flex-row justify-center items-center py-2 px-4 rounded-r-md ${
+                    selectedTab === 'Lock' ? 'bg-[#1F1B15]' : 'bg-[#E2E6EA]'
+                }`}
+                onPress={() => setSelectedTab('Lock')}
+            >
+                <MaterialIcons
+                    name="lock"
+                    size={24}
+                    color={selectedTab === 'Lock' ? '#E2E6EA' : '#4B4D4E'}
+                />
             </TouchableOpacity>
         </View>
     );

@@ -162,6 +162,8 @@ export default function BottomDrawer({
           <Animated.View style={[styles.backdrop, { opacity: backdropOpacity }]} />
         </Pressable>
 
+
+
         <Animated.View
           style={[
             styles.sheet,
