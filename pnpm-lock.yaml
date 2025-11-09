@@ -20,6 +20,9 @@ importers:
       expo:
         specifier: ^54.0.0
         version: 54.0.23(@babel/core@7.28.5)(react-native@0.81.5(@babel/core@7.28.5)(@types/react@18.2.79)(react@19.1.0))(react@19.1.0)
+      expo-linear-gradient:
+        specifier: ~15.0.7
+        version: 15.0.7(expo@54.0.23(@babel/core@7.28.5)(react-native@0.81.5(@babel/core@7.28.5)(@types/react@18.2.79)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@18.2.79)(react@19.1.0))(react@19.1.0)
       expo-status-bar:
         specifier: ~3.0.8
         version: 3.0.8(react-native@0.81.5(@babel/core@7.28.5)(@types/react@18.2.79)(react@19.1.0))(react@19.1.0)
@@ -54,6 +57,9 @@ importers:
       '@types/react-native':
         specifier: ^0.73.0
         version: 0.73.0(@babel/core@7.28.5)(@types/react@18.2.79)(react@19.1.0)
+      '@types/react-native-linear-gradient':
+        specifier: ^2.4.0
+        version: 2.4.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@18.2.79)(react@19.1.0))(react@19.1.0)
       eslint:
         specifier: ^9.25.1
         version: 9.39.1(jiti@1.21.7)
@@ -1006,6 +1012,10 @@ packages:
   '@types/prop-types@15.7.15':
     resolution: {integrity: sha512-F6bEyamV9jKGAFBEmlQnesRPGOQqS2+Uwi0Em15xenOxHaf2hv6L8YCVn3rPdPJOiJfPiCnLIRyvwVaqMY3MIw==}
 
+  '@types/react-native-linear-gradient@2.4.0':
+    resolution: {integrity: sha512-4fLf0oo4zEbfGPo7rprezBdyy490eyTpl4cogWR8i9CDJzlsAEpmfkjVx8BpgOOF/RNfpa1XgFiSABDqtIi5/Q==}
+    deprecated: This is a stub types definition for react-native-linear-gradient (https://github.com/react-native-community/react-native-linear-gradient). react-native-linear-gradient provides its own type definitions, so you don't need @types/react-native-linear-gradient installed!
+
   '@types/react-native@0.73.0':
     resolution: {integrity: sha512-6ZRPQrYM72qYKGWidEttRe6M5DZBEV5F+MHMHqd4TTYx0tfkcdrUFGdef6CCxY0jXU7wldvd/zA/b0A/kTeJmA==}
     deprecated: This is a stub types definition. react-native provides its own type definitions, so you do not need this installed.
@@ -1950,6 +1960,13 @@ packages:
     peerDependencies:
       expo: '*'
       react: '*'
+
+  expo-linear-gradient@15.0.7:
+    resolution: {integrity: sha512-yF+y+9Shpr/OQFfy/wglB/0bykFMbwHBTuMRa5Of/r2P1wbkcacx8rg0JsUWkXH/rn2i2iWdubyqlxSJa3ggZA==}
+    peerDependencies:
+      expo: '*'
+      react: '*'
+      react-native: '*'
 
   expo-modules-autolinking@3.0.21:
     resolution: {integrity: sha512-pOtPDLln3Ju8DW1zRW4OwZ702YqZ8g+kM/tEY1sWfv22kWUtxkvK+ytRDRpRdnKEnC28okbhWqeMnmVkSFzP6Q==}
@@ -3301,6 +3318,12 @@ packages:
 
   react-native-is-edge-to-edge@1.2.1:
     resolution: {integrity: sha512-FLbPWl/MyYQWz+KwqOZsSyj2JmLKglHatd3xLZWskXOpRaio4LfEDEz8E/A6uD8QoTHW6Aobw1jbEwK7KMgR7Q==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+
+  react-native-linear-gradient@2.8.3:
+    resolution: {integrity: sha512-KflAXZcEg54PXkLyflaSZQ3PJp4uC4whM7nT/Uot9m0e/qxFV3p6uor1983D1YOBJbJN7rrWdqIjq0T42jOJyA==}
     peerDependencies:
       react: '*'
       react-native: '*'
@@ -5383,6 +5406,13 @@ snapshots:
 
   '@types/prop-types@15.7.15': {}
 
+  '@types/react-native-linear-gradient@2.4.0(react-native@0.81.5(@babel/core@7.28.5)(@types/react@18.2.79)(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      react-native-linear-gradient: 2.8.3(react-native@0.81.5(@babel/core@7.28.5)(@types/react@18.2.79)(react@19.1.0))(react@19.1.0)
+    transitivePeerDependencies:
+      - react
+      - react-native
+
   '@types/react-native@0.73.0(@babel/core@7.28.5)(@types/react@18.2.79)(react@19.1.0)':
     dependencies:
       react-native: 0.81.5(@babel/core@7.28.5)(@types/react@18.2.79)(react@19.1.0)
@@ -6524,6 +6554,12 @@ snapshots:
     dependencies:
       expo: 54.0.23(@babel/core@7.28.5)(react-native@0.81.5(@babel/core@7.28.5)(@types/react@18.2.79)(react@19.1.0))(react@19.1.0)
       react: 19.1.0
+
+  expo-linear-gradient@15.0.7(expo@54.0.23(@babel/core@7.28.5)(react-native@0.81.5(@babel/core@7.28.5)(@types/react@18.2.79)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@18.2.79)(react@19.1.0))(react@19.1.0):
+    dependencies:
+      expo: 54.0.23(@babel/core@7.28.5)(react-native@0.81.5(@babel/core@7.28.5)(@types/react@18.2.79)(react@19.1.0))(react@19.1.0)
+      react: 19.1.0
+      react-native: 0.81.5(@babel/core@7.28.5)(@types/react@18.2.79)(react@19.1.0)
 
   expo-modules-autolinking@3.0.21:
     dependencies:
@@ -8035,6 +8071,11 @@ snapshots:
       - supports-color
 
   react-native-is-edge-to-edge@1.2.1(react-native@0.81.5(@babel/core@7.28.5)(@types/react@18.2.79)(react@19.1.0))(react@19.1.0):
+    dependencies:
+      react: 19.1.0
+      react-native: 0.81.5(@babel/core@7.28.5)(@types/react@18.2.79)(react@19.1.0)
+
+  react-native-linear-gradient@2.8.3(react-native@0.81.5(@babel/core@7.28.5)(@types/react@18.2.79)(react@19.1.0))(react@19.1.0):
     dependencies:
       react: 19.1.0
       react-native: 0.81.5(@babel/core@7.28.5)(@types/react@18.2.79)(react@19.1.0)
