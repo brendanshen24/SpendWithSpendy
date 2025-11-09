@@ -11,7 +11,7 @@ export default function App() {
 
     return (
         <>
-            <View className='font-sf-pro-regular'>
+            <View className='h-full w-full font-sf-pro-regular'>
                 {/*Spacer*/}
                 <View className="flex w-full h-[80px]"></View>
 

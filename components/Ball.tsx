@@ -6,7 +6,8 @@ import Animated, {
     withTiming,
     Easing,
 } from 'react-native-reanimated';
-import BallSVG from 'assets/ball.svg'; // Ensure this path is correct for your SVG
+
+import { Image } from 'react-native';
 
 const BALL_SIZE = 60; // 60px by 60px
 
@@ -62,7 +63,7 @@ const Ball: React.FC<BallProps> = ({ index, totalBalls, containerHeight }) => {
                 animatedStyle,
             ]}
         >
-            <BallSVG width={BALL_SIZE} height={BALL_SIZE} />
+            <Image source={require('../assets/ball.png')} style={{ width: BALL_SIZE, height: BALL_SIZE }}/>
         </Animated.View>
     );
 };
